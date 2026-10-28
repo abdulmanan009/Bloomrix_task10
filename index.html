@@ -10,16 +10,15 @@
 
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- 1. Responsive Header -->
     <header class="site-header">
         <div class="container header-inner">
             <a href="#" class="logo" aria-label="Home">MyPortfolio<span>.</span></a>
             
-            <!-- Mobile Nav Toggle -->
             <details class="mobile-menu">
                 <summary aria-label="Open Menu">☰</summary>
                 <nav class="mobile-nav">
-                    <a href="#about">About</a>
+                    <!-- Added aria-current="page" for active state -->
+                    <a href="#about" aria-current="page">About</a>
                     <a href="#skills">Skills</a>
                     <a href="#roadmap">Roadmap</a>
                     <a href="#assignments">Assignments</a>
@@ -28,7 +27,7 @@
             </details>
 
             <nav class="desktop-nav" aria-label="Main Navigation">
-                <a href="#about">About</a>
+                <a href="#about" aria-current="page">About</a>
                 <a href="#skills">Skills</a>
                 <a href="#roadmap">Roadmap</a>
                 <a href="#assignments">Assignments</a>
@@ -39,7 +38,6 @@
 
     <main id="main-content">
         
-        <!-- 2. Hero Section -->
         <section class="hero">
             <div class="container hero-layout">
                 <div class="hero-content">
@@ -56,7 +54,6 @@
             </div>
         </section>
 
-        <!-- 3. About Section (Two-column) -->
         <section id="about" class="section">
             <div class="container about-layout">
                 <div class="about-text">
@@ -70,7 +67,6 @@
             </div>
         </section>
 
-        <!-- 4. Skills Section (Grid Cards) -->
         <section id="skills" class="section bg-surface">
             <div class="container">
                 <h2>My Skills</h2>
@@ -91,7 +87,6 @@
             </div>
         </section>
 
-        <!-- 5. Training/Roadmap (CSS Counters) -->
         <section id="roadmap" class="section">
             <div class="container">
                 <h2>Training Roadmap</h2>
@@ -105,38 +100,44 @@
             </div>
         </section>
 
-        <!-- 6. Assignments Section (Status Badges + Container Query) -->
         <section id="assignments" class="section bg-surface">
             <div class="container">
                 <h2>My Assignments</h2>
                 <div class="assignments-grid">
-                    <!-- Component using Container Query -->
-                    <article class="assignment-card">
-                        <div class="assignment-info">
-                            <h3>Personal Profile</h3>
-                            <p>HTML Basics</p>
-                        </div>
-                        <span class="status status-completed">Completed</span>
-                    </article>
-                    <article class="assignment-card">
-                        <div class="assignment-info">
-                            <h3>Intern Registration</h3>
-                            <p>Tables & Forms</p>
-                        </div>
-                        <span class="status status-in-progress">In Progress</span>
-                    </article>
-                    <article class="assignment-card">
-                        <div class="assignment-info">
-                            <h3>Final Dashboard</h3>
-                            <p>Modern CSS</p>
-                        </div>
-                        <span class="status status-pending">Pending</span>
-                    </article>
+                    <!-- FIXED: Wrapped in a container class to make the container query work -->
+                    <div class="assignment-container">
+                        <article class="assignment-card">
+                            <div class="assignment-info">
+                                <h3>Personal Profile</h3>
+                                <p>HTML Basics</p>
+                            </div>
+                            <span class="status status-completed">Completed</span>
+                        </article>
+                    </div>
+                    
+                    <div class="assignment-container">
+                        <article class="assignment-card">
+                            <div class="assignment-info">
+                                <h3>Intern Registration</h3>
+                                <p>Tables & Forms</p>
+                            </div>
+                            <span class="status status-in-progress">In Progress</span>
+                        </article>
+                    </div>
+
+                    <div class="assignment-container">
+                        <article class="assignment-card">
+                            <div class="assignment-info">
+                                <h3>Final Dashboard</h3>
+                                <p>Modern CSS</p>
+                            </div>
+                            <span class="status status-pending">Pending</span>
+                        </article>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- 7. Table Section -->
         <section class="section">
             <div class="container">
                 <h2>Progress Overview</h2>
@@ -172,11 +173,11 @@
             </div>
         </section>
 
-        <!-- 8. Contact/Application Form -->
         <section id="contact" class="section bg-surface">
             <div class="container form-container">
                 <h2>Apply for Internship</h2>
                 <form action="#" method="post">
+                    <!-- FIXED: Using :has() in CSS to target this label -->
                     <div class="form-group">
                         <label for="name">Full Name</label>
                         <input type="text" id="name" name="name" placeholder="John Doe" required>
@@ -199,7 +200,6 @@
             </div>
         </section>
 
-        <!-- 9. FAQ Section -->
         <section class="section">
             <div class="container">
                 <h2>FAQ</h2>
@@ -216,7 +216,6 @@
 
     </main>
 
-    <!-- 10. Footer -->
     <footer class="site-footer">
         <div class="container footer-grid">
             <div class="footer-col">

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   CSS Variables (Light Theme)
+   CSS Variables
    ========================================================================== */
 :root {
     /* Colors */
@@ -10,6 +10,10 @@
     --color-text: #0f172a;
     --color-text-secondary: #64748b;
     --color-border: #e2e8f0;
+    
+    /* Form Validation Colors (Moved to variables) */
+    --color-valid: #10b981;
+    --color-invalid: #ef4444;
     
     /* Status Colors */
     --color-success-bg: #d1fae5;
@@ -26,7 +30,7 @@
     --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
     --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
 
-    /* Fluid Typography using clamp() */
+    /* Fluid Typography */
     --font-main: system-ui, -apple-system, sans-serif;
     --fs-sm: clamp(0.875rem, 1vw, 1rem);
     --fs-base: clamp(1rem, 1.5vw, 1.125rem);
@@ -35,7 +39,7 @@
     --fs-2xl: clamp(2rem, 4vw, 3rem);
     --fs-3xl: clamp(2.5rem, 6vw, 4rem);
     
-    /* Fluid Spacing using clamp() */
+    /* Fluid Spacing */
     --space-sm: clamp(0.5rem, 1vw, 1rem);
     --space-md: clamp(1rem, 3vw, 2rem);
     --space-lg: clamp(2rem, 6vw, 4rem);
@@ -43,7 +47,7 @@
     --max-width: 1200px;
 }
 
-/* Dark Theme (OS Preference) */
+/* Dark Theme */
 @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
         --color-bg: #0f172a;
@@ -73,7 +77,7 @@ body {
     color: var(--color-text);
     line-height: 1.6;
     font-size: var(--fs-base);
-    transition: background-color 0.3s, color 0.3s; /* Transition 1 */
+    transition: background-color 0.3s, color 0.3s;
 }
 
 h1, h2, h3 {
@@ -90,7 +94,6 @@ img {
     display: block;
 }
 
-/* Logical Properties */
 .container {
     width: 100%;
     max-width: var(--max-width);
@@ -109,7 +112,6 @@ img {
 /* ==========================================================================
    Components
    ========================================================================== */
-/* Buttons */
 .btn {
     display: inline-block;
     padding: 0.75rem 1.5rem;
@@ -119,7 +121,7 @@ img {
     text-align: center;
     cursor: pointer;
     border: 2px solid transparent;
-    transition: transform 0.2s ease, background-color 0.2s ease; /* Transition 2 */
+    transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 .btn-primary {
@@ -153,7 +155,6 @@ summary:focus-visible {
     outline-offset: 2px;
 }
 
-/* Skip Link */
 .skip-link {
     position: absolute;
     top: -40px;
@@ -168,7 +169,6 @@ summary:focus-visible {
     top: 0;
 }
 
-/* Status Badges */
 .status {
     display: inline-block;
     padding: 4px 12px;
@@ -184,7 +184,6 @@ summary:focus-visible {
 /* ==========================================================================
    Layouts
    ========================================================================== */
-/* Header */
 .site-header {
     background-color: var(--color-surface);
     border-bottom: 1px solid var(--color-border);
@@ -237,14 +236,21 @@ summary:focus-visible {
     text-decoration: none;
     color: var(--color-text-secondary);
     font-weight: 600;
-    transition: color 0.2s; /* Transition 3 */
+    transition: color 0.2s;
+}
+
+/* Active Navigation State */
+.mobile-nav a[aria-current="page"], 
+.desktop-nav a[aria-current="page"] {
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-primary);
 }
 
 .mobile-nav a:hover, .desktop-nav a:hover {
     color: var(--color-primary);
 }
 
-/* Hero Section (Flexbox 1) */
+/* Hero */
 .hero {
     padding-block: var(--space-lg);
     background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-bg) 100%);
@@ -264,6 +270,7 @@ summary:focus-visible {
 
 .hero-actions {
     display: flex;
+    flex-wrap: wrap; /* Added wrap for narrow screens */
     gap: var(--space-md);
 }
 
@@ -274,7 +281,7 @@ summary:focus-visible {
     object-fit: cover;
 }
 
-/* About Section (Flexbox 2) */
+/* About */
 .about-layout {
     display: flex;
     flex-direction: column;
@@ -286,7 +293,7 @@ summary:focus-visible {
     box-shadow: var(--shadow-md);
 }
 
-/* Skills Grid (Grid 1) */
+/* Skills Grid */
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -305,7 +312,7 @@ summary:focus-visible {
     box-shadow: var(--shadow-md);
 }
 
-/* Roadmap (CSS Counters) */
+/* Roadmap */
 .roadmap-list {
     counter-reset: roadmap;
 }
@@ -336,11 +343,16 @@ summary:focus-visible {
     font-weight: bold;
 }
 
-/* Assignments (Grid 2 + Container Query) */
+/* Assignments (Grid + Container Query) */
 .assignments-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: var(--space-md);
+}
+
+/* FIXED: Container wrapper */
+.assignment-container {
+    container-type: inline-size;
 }
 
 .assignment-card {
@@ -351,12 +363,11 @@ summary:focus-visible {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    container-type: inline-size; /* Container Query Setup */
 }
 
 /* 
    Container Query: 
-   If the card is less than 350px wide, stack the status pill below the text.
+   Targets the card INSIDE the container.
 */
 @container (max-width: 349px) {
     .assignment-card {
@@ -364,22 +375,12 @@ summary:focus-visible {
     }
 }
 
-/* Use :has() to highlight a card if it contains a "Pending" status */
 .assignment-card:has(.status-pending) {
     border-color: var(--color-danger-text);
     background-color: var(--color-surface);
 }
 
-/* 
-   Use :is() and :not()
-   Target all links except the logo inside the footer
-*/
-.footer-col :is(a):not(.logo) {
-    color: var(--color-text-secondary);
-    text-decoration: none;
-}
-
-/* Table Section */
+/* Table */
 .table-wrapper {
     overflow-x: auto;
     border-radius: var(--radius-md);
@@ -412,7 +413,7 @@ th {
     background: var(--color-bg);
 }
 
-/* Form Section */
+/* Form */
 .form-container {
     max-width: 600px;
     margin-inline: auto;
@@ -436,21 +437,51 @@ input, textarea {
     background: var(--color-bg);
     color: var(--color-text);
     font-family: inherit;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-/* Form States */
+/* FIXED: Removed outline: none, added box-shadow for visible focus */
 input:focus, textarea:focus {
     border-color: var(--color-primary);
-    outline: none;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    outline: none; 
+}
+
+/* FIXED: Target validation correctly using :has() on the parent label */
+label:has(+ input:not(:placeholder-shown):valid) {
+    color: var(--color-valid);
+}
+label:has(+ input:not(:placeholder-shown):valid)::after {
+    content: " ✓";
+}
+
+label:has(+ input:not(:placeholder-shown):invalid) {
+    color: var(--color-invalid);
+}
+label:has(+ input:not(:placeholder-shown):invalid)::after {
+    content: " ✗";
+}
+
+/* Required asterisk */
+label:has(+ input:required)::after {
+    content: " *";
+    color: var(--color-invalid);
 }
 
 input:not(:placeholder-shown):valid {
-    border-color: #10b981; /* Green */
+    border-color: var(--color-valid);
 }
 
 input:not(:placeholder-shown):invalid {
-    border-color: #ef4444; /* Red */
+    border-color: var(--color-invalid);
+}
+
+textarea:not(:placeholder-shown):valid {
+    border-color: var(--color-valid);
+}
+
+textarea:not(:placeholder-shown):invalid {
+    border-color: var(--color-invalid);
 }
 
 input:disabled {
@@ -459,12 +490,7 @@ input:disabled {
     opacity: 0.7;
 }
 
-input:required + label::after {
-    content: " *";
-    color: #ef4444;
-}
-
-/* FAQ Section */
+/* FAQ */
 details {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
@@ -521,6 +547,16 @@ details p {
     gap: 0.5rem;
 }
 
+.footer-col a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-col a:hover {
+    color: var(--color-primary);
+}
+
 .footer-bottom {
     text-align: center;
     padding-block-start: var(--space-md);
@@ -532,24 +568,15 @@ details p {
 /* ==========================================================================
    Animations
    ========================================================================== */
-
-/* Animation 1: Fade In Up on hero */
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .hero-content {
     animation: fadeInUp 0.8s ease-out forwards;
 }
 
-/* Animation 2: Pulse on Pending Badge */
 @keyframes pulse {
     0% { transform: scale(1); }
     50% { transform: scale(1.05); }
@@ -561,10 +588,8 @@ details p {
 }
 
 /* ==========================================================================
-   Responsive Breakpoints (Mobile-First)
+   Responsive Breakpoints
    ========================================================================== */
-
-/* Breakpoint 1: Tablet (768px) */
 @media (min-width: 768px) {
     .hero-layout {
         flex-direction: row;
@@ -592,7 +617,6 @@ details p {
     .mobile-menu { display: none; }
 }
 
-/* Breakpoint 2: Desktop (1024px) */
 @media (min-width: 1024px) {
     .hero {
         padding-block: 6rem;
@@ -603,7 +627,6 @@ details p {
     }
 }
 
-/* Breakpoint 3: Large Desktop (1440px) */
 @media (min-width: 1440px) {
     :root {
         --max-width: 1400px;
@@ -614,9 +637,7 @@ details p {
     }
 }
 
-/* ==========================================================================
-   Reduced Motion (Accessibility)
-   ========================================================================== */
+/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -634,11 +655,8 @@ details p {
     }
 }
 
-/* ==========================================================================
-   Print CSS
-   ========================================================================== */
+/* Print CSS */
 @media print {
-    /* Hide non-essential elements */
     .site-header, .site-footer, .mobile-menu, .hero-actions, .form-container, button {
         display: none !important;
     }
@@ -659,7 +677,6 @@ details p {
         page-break-inside: avoid;
     }
 
-    /* Ensure links are readable */
     a {
         color: black;
         text-decoration: underline;
