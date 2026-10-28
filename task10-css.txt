@@ -1,0 +1,27 @@
+Build the following practical page using HTML and CSS. Reuse the CSS concepts learned on earlier days. The assignment should be functional and visually organized, not just a collection of isolated examples.
+• Build a complete multi-section internship website using the HTML project from the previous HTML training.
+• Create a responsive header with logo, navigation, active state, and mobile-friendly layout using CSS.
+• Create a hero section with heading, text, call-to-action buttons, and responsive media.
+• Create an About section using a responsive two-column layout.
+• Create a Skills section using responsive Grid cards.
+• Create a Training/Roadmap section with numbered milestones using CSS counters or generated content.
+• Create an Assignments section with cards containing status badges such as Pending, In Progress, and Completed.
+• Create a responsive table or table-like information section and ensure it does not break on small screens.
+• Create a complete Contact/Application form with styled focus, valid, invalid, required, disabled, and placeholder states.
+• Create a FAQ section using the existing HTML details/summary elements and style open/closed states.
+• Create a footer with multiple responsive areas.
+• Define a reusable CSS variable system for colors, spacing, font sizes, radii, and shadows.
+• Use a mobile-first responsive strategy and at least three meaningful responsive breakpoints.
+• Use Flexbox for at least two components and Grid for at least two components.
+• Use at least one container query for a reusable card/component.
+• Use clamp() for at least three fluid font or spacing values.
+• Use :is(), :where(), :not(), and :has() where they genuinely improve the CSS.
+• Add light/dark theme support using custom properties and a user preference or theme class.
+• Add at least two CSS animations and at least three transitions. Respect prefers-reduced-motion.
+• Add print CSS so the main content can be printed cleanly.
+• Use logical properties in at least two components.
+• Use accessible focus states and maintain readable color contrast.
+• Use semantic class names and keep selectors reasonably shallow.
+• Keep CSS in an external stylesheet. Do not put the entire design into inline styles.
+• Use browser DevTools to test mobile, tablet, desktop, print preview, focus states, and computed styles.
+• Remove unused or duplicated CSS before final submission.
